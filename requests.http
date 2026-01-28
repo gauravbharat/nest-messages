@@ -1,0 +1,20 @@
+### 404
+GET http://localhost:3333
+
+### List all messages
+
+GET http://localhost:3333/messages
+
+
+### Create a new message
+POST http://localhost:3333/messages
+content-type: application/json
+
+{
+  "content": "hi there"
+}
+
+
+### Get a particular message by ID
+GET http://localhost:3333/messages/123
+
