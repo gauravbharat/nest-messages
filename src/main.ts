@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { MessagesModule } from './messages/messages.module';
 import { ValidationPipe } from '@nestjs/common';
