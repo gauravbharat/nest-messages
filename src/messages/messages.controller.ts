@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Headers, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Headers,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMessageDto } from './dtos/create-message.dto';
 import { MessagesService } from './messages.service';
 
@@ -34,8 +42,16 @@ export class MessagesController {
   }
 
   @Get('/:id')
-  getMessage(@Param('id') id: string) {
+  async getMessage(@Param('id') id: string): Promise<any> {
     console.log('id', id);
-    return this.messagesService.findOne(id);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const message = await this.messagesService.findOne(id);
+
+    if (!message) {
+      throw new NotFoundException('Message not found.');
+    }
+
+    return message;
   }
 }
