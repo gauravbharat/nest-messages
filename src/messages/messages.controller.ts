@@ -1,11 +1,20 @@
 import { Controller, Get, Post, Headers, Body, Param } from '@nestjs/common';
 import { CreateMessageDto } from './dtos/create-message.dto';
+import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
+  messagesService: MessagesService;
+
+  constructor() {
+    // TEMP CODE: DO NOT CREATE OWN DEPENDENCIES, use Dependency Injection (DI) later
+    this.messagesService = new MessagesService();
+  }
+
   @Get()
   listMessages(@Headers() header: any) {
     console.log('Header', header);
+    return this.messagesService.findAll();
   }
 
   /** Applied validation class to the request handler.
@@ -21,10 +30,12 @@ export class MessagesController {
   @Post()
   createMessage(@Body() body: CreateMessageDto) {
     console.log('Body', body);
+    return this.messagesService.create(body.content);
   }
 
   @Get('/:id')
   getMessage(@Param('id') id: string) {
     console.log('id', id);
+    return this.messagesService.findOne(id);
   }
 }
