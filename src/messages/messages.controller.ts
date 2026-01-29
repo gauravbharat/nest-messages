@@ -12,12 +12,7 @@ import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
-  messagesService: MessagesService;
-
-  constructor() {
-    // TEMP CODE: DO NOT CREATE OWN DEPENDENCIES, use Dependency Injection (DI) later
-    this.messagesService = new MessagesService();
-  }
+  constructor(private messagesService: MessagesService) {}
 
   @Get()
   listMessages(@Headers() header: any) {

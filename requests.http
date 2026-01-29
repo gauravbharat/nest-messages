@@ -18,3 +18,6 @@ content-type: application/json
 ### Get a particular message by ID
 GET http://localhost:3333/messages/d979d84e-d5ae-4182-9294-ad8fed44aff4
 
+
+### Get a particular message by ID (404)
+GET http://localhost:3333/messages/invalid-id

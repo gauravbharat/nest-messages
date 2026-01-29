@@ -1,6 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 
+// with @Injectable, class gets registered in the DI Container/Injector
+@Injectable()
 export class MessagesRepository {
   async findAll(): Promise<any> {
     const contents = await readFile('messages.json', 'utf8');
